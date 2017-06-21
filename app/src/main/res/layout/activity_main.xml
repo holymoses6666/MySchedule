@@ -85,6 +85,12 @@
                 android:layout_height="wrap_content"
                 android:text="Создать пункт"/>
 
+            <Button
+                android:id="@+id/delete_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Удалить пункт"/>
+
         </LinearLayout>
     </ScrollView>
 
