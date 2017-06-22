@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MySchedule</string>
+    <item name="Punkt_id" type="id"/>
 </resources>

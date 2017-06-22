@@ -30,6 +30,10 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
     public int [] lenght = new int[100];
 
 
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,17 +55,35 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
         right.setOnClickListener(this);
         CreateButton.setOnClickListener(this);
         DeleteButton.setOnClickListener(this);
+
+
+        /*childBtn = PunktLayout.getChildAt(id);
+
+        childBtn.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view){
+                PunktLayout.removeAllViews();
+            }
+
+
+        });*/
+
+
     }
+
+
+
 
     @Override
     public void onClick(View v)
     {
 
+
+
         switch (v.getId())
         {
             case R.id.left:
                 PunktLayout.removeAllViews();
-               DeloNumber--;
+                DeloNumber--;
                 PunktNumber = 0;
                 LoadButton();
                 break;
@@ -81,21 +103,28 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
                 PunktLayout.removeAllViews();
                 lenght[DeloNumber]=0;
                 break;
+            case R.id.Punkt_id:
+                PunktLayout.removeAllViews();
+                break;
         }
 
         Delo.setText("Дело" + DeloNumber);
-        Punkt.setText("Пункт"+PunktNumber);
-
+        Punkt.setText("Пункт"+ PunktNumber);
     }
 
     public void createButton()
     {
+
+
             LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             lParams.gravity = Gravity.LEFT;
             Button NewPunkt = new Button(this);
+            NewPunkt.setId(R.id.Punkt_id);
             NewPunkt.setText(Punkt.getText().toString());
             PunktLayout.addView(NewPunkt, lParams);
             NewPunkt.setOnClickListener(this);
+
+
      }
 
 
@@ -108,16 +137,16 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
     {
         for(int i = 0; i < lenght[DeloNumber]; i++)
         {
+
             LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             lParams.gravity = Gravity.LEFT;
             Button NewPunkt = new Button(this);
             NewPunkt.setText(BtnArray[DeloNumber][i]);
             PunktLayout.addView(NewPunkt, lParams);
             NewPunkt.setOnClickListener(this);
+
         }
     }
-
-
 
 
 
