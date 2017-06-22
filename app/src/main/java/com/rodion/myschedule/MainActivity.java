@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
                 PunktLayout.removeAllViews();
                 lenght[DeloNumber]=0;
                 break;
-            case R.id.Punkt_id:
+            case 10:
                 PunktLayout.removeAllViews();
                 break;
         }
@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
             LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             lParams.gravity = Gravity.LEFT;
             Button NewPunkt = new Button(this);
-            NewPunkt.setId(R.id.Punkt_id);
+            NewPunkt.setId(10);
             NewPunkt.setText(Punkt.getText().toString());
             PunktLayout.addView(NewPunkt, lParams);
             NewPunkt.setOnClickListener(this);
