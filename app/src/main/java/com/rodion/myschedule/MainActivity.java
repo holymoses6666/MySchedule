@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
     public Button DeleteButton;
 
     public int DeloNumber;
-    public int NumberPunkt;
+    public int PunktNumber;
 
     public TextView Delo;
     public EditText Punkt;
@@ -57,64 +57,66 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
     public void onClick(View v)
     {
 
-
         switch (v.getId())
         {
             case R.id.left:
-                if(DeloNumber>0)
-                DeloNumber--;
                 PunktLayout.removeAllViews();
-                NumberPunkt = 0;
-              for(int i = 0; i< lenght[DeloNumber];i++)
-              {
-                createButton();
-                  NumberPunkt++;
-              }
-
+               DeloNumber--;
+                PunktNumber = 0;
+                LoadButton();
                 break;
             case R.id.right:
-                DeloNumber++;
                 PunktLayout.removeAllViews();
-                NumberPunkt = 0;
-                for(int i = 0; i< lenght[DeloNumber];i++)
-                {
-                    createButton();
-                    NumberPunkt++;
-                }
+               DeloNumber++;
+                PunktNumber = 0;
+                LoadButton();
                 break;
             case R.id.create_button:
-                BtnArray[DeloNumber][NumberPunkt] = Punkt.getText().toString();
-                createButton();
-                NumberPunkt++;
                 lenght[DeloNumber]++;
-                Punkt.setText("");
+                createButton();
+                saveButton();
+                PunktNumber++;
                 break;
-
             case R.id.delete_button:
-                for(int i = 0; i< 100; i++)
-                BtnArray[DeloNumber][i] = "";
                 PunktLayout.removeAllViews();
                 lenght[DeloNumber]=0;
-
                 break;
         }
 
         Delo.setText("Дело" + DeloNumber);
+        Punkt.setText("Пункт"+PunktNumber);
 
     }
 
     public void createButton()
     {
+            LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            lParams.gravity = Gravity.LEFT;
+            Button NewPunkt = new Button(this);
+            NewPunkt.setText(Punkt.getText().toString());
+            PunktLayout.addView(NewPunkt, lParams);
+            NewPunkt.setOnClickListener(this);
+     }
 
-        LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        lParams.gravity = Gravity.LEFT;
-        Button NewPunkt = new Button(this);
-        NewPunkt.setText(BtnArray[DeloNumber][NumberPunkt]);
-        PunktLayout.addView(NewPunkt, lParams);
-        NewPunkt.setOnClickListener(this);
 
+     public void saveButton()
+     {
+         BtnArray[DeloNumber][PunktNumber] = Punkt.getText().toString();
 
+     }
+    public void LoadButton()
+    {
+        for(int i = 0; i < lenght[DeloNumber]; i++)
+        {
+            LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            lParams.gravity = Gravity.LEFT;
+            Button NewPunkt = new Button(this);
+            NewPunkt.setText(BtnArray[DeloNumber][i]);
+            PunktLayout.addView(NewPunkt, lParams);
+            NewPunkt.setOnClickListener(this);
+        }
     }
+
 
 
 

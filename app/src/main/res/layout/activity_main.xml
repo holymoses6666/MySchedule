@@ -24,6 +24,12 @@
             >
 
             <TextView
+                android:id="@+id/debug_punkt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Номер пункта"/>
+
+            <TextView
                 android:id="@+id/delo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -94,6 +100,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="След.дело"
+                    android:visibility="visible"
                     tools:layout_editor_absoluteX="288dp"
                     tools:layout_editor_absoluteY="455dp"/>
 
