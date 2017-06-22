@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 public class MainActivity extends AppCompatActivity implements  View.OnClickListener
@@ -27,13 +26,16 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
 
     public LinearLayout PunktLayout;
 
-    public Button [][] BtnArray;
+    public String [][] BtnArray = new String[100][100];
+    public int [] lenght = new int[100];
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
 
         left = (Button)findViewById(R.id.left);
         right = (Button)findViewById(R.id.right);
@@ -61,17 +63,39 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
             case R.id.left:
                 if(DeloNumber>0)
                 DeloNumber--;
+                PunktLayout.removeAllViews();
+                NumberPunkt = 0;
+              for(int i = 0; i< lenght[DeloNumber];i++)
+              {
+                createButton();
+                  NumberPunkt++;
+              }
+
                 break;
             case R.id.right:
                 DeloNumber++;
+                PunktLayout.removeAllViews();
+                NumberPunkt = 0;
+                for(int i = 0; i< lenght[DeloNumber];i++)
+                {
+                    createButton();
+                    NumberPunkt++;
+                }
                 break;
             case R.id.create_button:
+                BtnArray[DeloNumber][NumberPunkt] = Punkt.getText().toString();
                 createButton();
                 NumberPunkt++;
+                lenght[DeloNumber]++;
+                Punkt.setText("");
                 break;
+
             case R.id.delete_button:
+                for(int i = 0; i< 100; i++)
+                BtnArray[DeloNumber][i] = "";
                 PunktLayout.removeAllViews();
-                Toast.makeText(MainActivity.this, "Deleted", Toast.LENGTH_SHORT).show();
+                lenght[DeloNumber]=0;
+
                 break;
         }
 
@@ -81,12 +105,14 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
 
     public void createButton()
     {
+
         LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         lParams.gravity = Gravity.LEFT;
         Button NewPunkt = new Button(this);
-        NewPunkt.setText(Punkt.getText().toString());
+        NewPunkt.setText(BtnArray[DeloNumber][NumberPunkt]);
         PunktLayout.addView(NewPunkt, lParams);
         NewPunkt.setOnClickListener(this);
+
 
     }
 
